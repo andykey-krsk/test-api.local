@@ -9,7 +9,7 @@ class Product_model extends CI_Model
 	}
 
 	public function getProduct(){
-		$query = $this->db->get('product');
+		$query = $this->db->get('products');
 
 		return $query->row_array();
 	}
