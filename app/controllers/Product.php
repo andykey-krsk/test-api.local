@@ -6,26 +6,35 @@ class Product extends CI_Controller
 	{
 		parent::__construct();
 		$this->load->model('product_model');
-
 	}
 
 	public function index(){
-
-		$products = $this->product_model->getProduct();
-
-		print_r($products);
-
-		$this->load->view('product/index');
+		$products = $this->product_model->getAll();
+		header('Content-type: json/application');
+		echo json_encode($products);
 	}
 
 	public function show($id){
-		$data['title'] = 'title';
-		$data['id'] = $id;
-		$this->load->view('product/show',$data);
+		$product = $this->product_model->getOne($id);
+
+		if(empty($product)){
+			show_404();
+		}
+
+		$product['img'] = $this->product_model->getImg($id);
+
+		header('Content-type: json/application');
+		echo json_encode($product);
 	}
 
 	public function group($name){
-		$data['name'] = $name;
-		$this->load->view('product/group', $data);
+		$products = $this->product_model->getGroup($name);
+
+		if(empty($products)){
+			show_404();
+		}
+
+		header('Content-type: json/application');
+		echo json_encode($products);
 	}
 }

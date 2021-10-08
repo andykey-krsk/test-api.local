@@ -56,3 +56,7 @@ $route['translate_uri_dashes'] = FALSE;
 $route['product'] = 'product/index';
 $route['product/(:any)'] = 'product/show/$1';
 $route['product/group/(:any)'] = 'product/group/$1';
+
+$route['order/create'] = 'order/create';
+$route['order/(:any)'] = 'order/show/$1';
+$route['order/cancel/(:any)'] = 'order/cancel/$1';
