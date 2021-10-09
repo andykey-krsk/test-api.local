@@ -39,14 +39,13 @@ class Order extends CI_Controller
 			}
 		}
 
-		$order = $this->order_model->createOrder($data);
+		$order_id = $this->order_model->createOrder($data);
 
-		if(empty($order)){
-			die('Ошибка создания заказа');;
+		if(empty($order_id)){
+			die('Ошибка создания заказа');
 		}
 
-		header('Content-type: json/application');
-		echo json_encode($order);
+		$this->show($order_id);
 	}
 
 	public function cancel($id){

@@ -26,19 +26,29 @@ class Order_model extends CI_Model
 		$this->db->where('order_id', $id);
 		$this->db->update('orders', $data);
 
-		$query = $this->db->get_where('orders',array('order_id'=>$id));
-		return $query->row_array();
+		return $this->getOrder($id);
 	}
 
 	public function createOrder($data){
-		var_dump($data);
+		$order['user_id'] = $data['user_id'];
+		$this->db->select_max('number', 'max_number');
+		$query = $this->db->get('orders');
 
-		//$this->db->insert('orders', $data);
+		$order['number'] = $query->row_array()['max_number'] + 1;
 
-		//$this->db->insert('order_product', $data);
+		//создаем заказ
+		$this->db->insert('orders', $order);
+		$order_id = (string)$this->db->insert_id();
 
-		//$query = $this->db->get_where('orders',array('order_id'=>$id));
-		//return $query->row_array();
+		//добабавляем продукты в заказ
+		$product = $data['product'];
+		foreach ($product as &$item) {
+			$item['order_id'] = $order_id;
+		}
+		unset($item);
+
+		$this->db->insert_batch('order_product', $product);
+		return $order_id;
 	}
 
 	public function checkUser($id){
