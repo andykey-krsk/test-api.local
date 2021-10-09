@@ -11,6 +11,9 @@ class Order extends CI_Controller
 	public function show($id){
 		$order = $this->order_model->getOrder($id);
 
+		$order['user'] = $this->order_model->getUser($order['user_id']);
+		unset($order['user_id']);
+
 		if(empty($order)){
 			show_404();
 		}

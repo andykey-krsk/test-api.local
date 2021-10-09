@@ -12,6 +12,12 @@ class Order_model extends CI_Model
 		return $query->row_array();
 	}
 
+	public function getUser($id){
+		$query = $this->db->get_where('users',array('user_id'=>$id));
+		return $query->row_array();
+	}
+
+
 	public function getProductByOrder($id){
 		$this->db->select('p.product_id, p.product_name, p.product_price, o.product_id, quantity');
 		$this->db->from('products as p');
@@ -31,6 +37,7 @@ class Order_model extends CI_Model
 
 	public function createOrder($data){
 		$order['user_id'] = $data['user_id'];
+		$order['coment'] = $data['coment'];
 		$this->db->select_max('number', 'max_number');
 		$query = $this->db->get('orders');
 
