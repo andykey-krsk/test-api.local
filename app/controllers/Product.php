@@ -22,7 +22,6 @@ class Product extends CI_Controller
 		}
 
 		$product['img'] = $this->product_model->getImg($id);
-
 		header('Content-type: json/application');
 		echo json_encode($product);
 	}
