@@ -19,7 +19,6 @@ class Order_model extends CI_Model
 			->row_array();
 	}
 
-
 	public function getProductByOrder($id){
 		return $this->db
 			->select('p.product_id, p.product_name, p.product_price, o.product_id, quantity')
@@ -31,9 +30,9 @@ class Order_model extends CI_Model
 	}
 
 	public function setOrderCancel($id){
-		return $this->db->where('order_id', $id)
-			->update('orders', array('status'=>'отменен'))
-			->getOrder($id);
+		$this->db
+			->where('order_id', $id)
+			->update('orders', array('status'=>'отменен'));
 	}
 
 	public function createOrder($data){

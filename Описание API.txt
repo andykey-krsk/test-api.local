@@ -1,0 +1,144 @@
+GET методы:
+По адресу: http://test-api.local/product
+получаем массив json-объектов с ИД и названием товара
+[
+    {
+        "product_id": "1",
+        "product_name": "porro"
+    },
+    {
+        "product_id": "10",
+        "product_name": "voluptas"
+    }
+]
+
+По адресу: http://test-api.local/product/1
+http://test-api.local/product/[ИД товара]
+получаем json-объект с полной информацией о товаре
+{
+    "product_id": "1",
+    "product_name": "porro",
+    "product_description": "Autem corporis temporibus rem asperiores non sit. Ex distinctio quia deserunt. Rerum aut provident voluptates aperiam voluptatem voluptatibus officiis.",
+    "product_price": "373",
+    "group": "c",
+    "img": [
+        {
+            "img_id": "1",
+            "img_small": "Laboriosam ex ex odio tempore.",
+            "img_full": "Omnis qui voluptatem dolores delectus culpa maiores maxime. Similique quae ipsum atque ad nisi et. F"
+        },
+        {
+            "img_id": "2",
+            "img_small": "Voluptatem velit et dolorum praesentium.",
+            "img_full": "Quis error sed nihil sunt fugiat. Optio provident maiores aliquam. Aut earum quasi possimus veritati"
+        },
+        {
+            "img_id": "3",
+            "img_small": "Eos alias earum recusandae ut qui.",
+            "img_full": "Quaerat molestias totam officia et aliquid nam esse. Ullam dicta ut quo nihil aut ipsa cum provident"
+        }
+    ]
+}
+
+По адресу: http://test-api.local/product/group/c
+http://test-api.local/product/group/[название группы]
+получаем массив json-объектов с ИД и названием товара
+[
+    {
+        "product_id": "1",
+        "product_name": "porro"
+    },
+    {
+        "product_id": "8",
+        "product_name": "laboriosam"
+    }
+]
+
+По адресу: http://test-api.local/order/1
+http://test-api.local/order/[ИД заказа]
+получаем json-объект с полной информацией о заказе
+{
+    "order_id": "1",
+    "date": "1981-08-17",
+    "number": "100000",
+    "status": "отправлен",
+    "coment": "Коментарий",
+    "user": {
+        "user_id": "4",
+        "name": "ex",
+        "phone": "78659144051"
+    },
+    "product": [
+        {
+            "product_id": "1",
+            "product_name": "porro",
+            "product_price": "373",
+            "quantity": "5"
+        },
+        {
+            "product_id": "2",
+            "product_name": "ut",
+            "product_price": "49",
+            "quantity": "6"
+        }
+    ]
+}
+
+POST методы:
+По адресу: http://test-api.local/order/cancel/40
+http://test-api.local/order/cancel/[номер заказа]
+получаем json-объект с информацией о заказе без массива товаров
+с измененным полем "status": "отменен"
+{
+    "order_id": "39",
+    "date": "2021-10-09",
+    "number": "100018",
+    "user_id": "11",
+    "status": "отменен",
+    "coment": "текст коментария"
+}
+
+По адресу: http://test-api.local/order/create
+посылается json-объект с информацией о заказе
+{
+    "user_id": "11",
+    "coment": "текст коментария",
+    "product": [
+        {
+            "product_id": "1",
+            "quantity": "5"
+        },
+        {
+            "product_id": "2",
+            "quantity": "6"
+        }
+    ]
+}
+
+в ответ приходит json-объект с полной информацией о созданном заказе
+{
+    "order_id": "40",
+    "date": "2021-10-10",
+    "number": "100019",
+    "status": "новый",
+    "coment": "текст коментария",
+    "user": {
+        "user_id": "11",
+        "name": "corrupti",
+        "phone": "78814904538"
+    },
+    "product": [
+        {
+            "product_id": "1",
+            "product_name": "porro",
+            "product_price": "373",
+            "quantity": "5"
+        },
+        {
+            "product_id": "2",
+            "product_name": "ut",
+            "product_price": "49",
+            "quantity": "6"
+        }
+    ]
+}

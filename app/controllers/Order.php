@@ -52,7 +52,8 @@ class Order extends CI_Controller
 	}
 
 	public function cancel($id){
-		$order = $this->order_model->setOrderCancel($id);
+		$this->order_model->setOrderCancel($id);
+		$order = $this->order_model->getOrder($id);
 
 		if(empty($order)){
 			show_404();
